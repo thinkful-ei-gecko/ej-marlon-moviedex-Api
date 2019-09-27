@@ -25,18 +25,18 @@ app.use(function validateBearerToken(req, res, next) {
 app.get('/movie', (req, res) => {
     const {genre, country, avg_vote} = req.query
 
-    let newMovies;
+    let newMovies = movies;
 
     if (genre){
-        newMovies = movies.filter(movie => movie.genre.toLowerCase().includes(genre.toLowerCase()));
+        newMovies = newMovies.filter(movie => movie.genre.toLowerCase().includes(genre.toLowerCase()));
     }
 
     if (country){
-        newMovies = movies.filter(movie => movie.country.toLowerCase().includes(country.toLowerCase()));
+        newMovies = newMovies.filter(movie => movie.country.toLowerCase().includes(country.toLowerCase()));
     }
 
     if (avg_vote){
-        newMovies = movies.filter(movie =>  movie.avg_vote >= parseInt(avg_vote));
+        newMovies = newMovies.filter(movie =>  movie.avg_vote >= parseInt(avg_vote));
     }
     
     res.json(newMovies);
